@@ -1,5 +1,6 @@
 'use strict';
 
+// функция создания элемента списка
 function createNewItem() {
 	var newLi = document.createElement('li'); // создал элемент списка
 	var val = document.getElementById('txt').value; // взял значение из инпут
@@ -8,6 +9,7 @@ function createNewItem() {
 	parent.appendChild(newLi); // добавление в дом
 }
 
+// функция для очистки невыделенных списков, написана для участия в selectOneItem
 function removeActiveClass() {
 	var liItem = document.getElementsByTagName('li');//собрал элементы по признаку
 	// перебрал массив и предварительно удалил классы active
@@ -16,6 +18,7 @@ function removeActiveClass() {
 	};
 };
 
+// функция которая снимает выделение с прочих элементов и выделяет по клику нужный
 function selectOneItem(){
 	var parent = document.getElementById('list');//нашёл родительский элемент от которого смотрим индекс дочернего
 	var selectItem = document.getElementsByTagName('li'); //выборка всех элементов (дочерних) к которым относится клик
@@ -26,7 +29,7 @@ function selectOneItem(){
         
         var e = e || event; //IE 6-8 примет значение event
         var target = e.target || e.srcElement; //для поддержки в IE 6-8 e.srcElement .target засекает элемент на котором произошло событие
-        for(var i = 0; i < parent.children.length; i++) { //требует разбора
+        for(var i = 0; i < parent.children.length; i++) {
             if(parent.children[i] == target) {
             	selectItem[i].classList.add('active');
             };
@@ -34,6 +37,25 @@ function selectOneItem(){
     };
 };
 selectOneItem();
+
+// функция внесения изменения в выбранный элемент
+function changeCurrentItem(){
+	var current = document.getElementsByClassName('active');
+	var val = document.getElementById('txt').value;
+	var color = document.getElementById('color').value;
+	var marker = document.getElementById('marker').value;
+	if (current.length == 0) {
+		alert('Choose an element to apply changes');
+	} else {
+		current[0].innerHTML = val;
+		current[0].style.color = color;
+		current[0].setAttribute('type', marker);
+	};
+};
+
+
+
+
 
 function removeCurrentItem(){
 	var current = document.getElementsByClassName('active');
@@ -43,6 +65,7 @@ function removeCurrentItem(){
 		current[0].parentNode.removeChild(current[0]);
 	};
 };
+
 
 
 
