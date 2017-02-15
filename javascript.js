@@ -23,8 +23,9 @@ function selectOneItem(){
 // функция которая находит индекс элемента массива по onclick
     parent.onclick = function (e) {
     	removeActiveClass();//вызов функции для удаления лишних
-        var e = e || event; //требует разбора
-        var target = e.target || e.srcElement; //требует разбора
+        
+        var e = e || event; //IE 6-8 примет значение event
+        var target = e.target || e.srcElement; //для поддержки в IE 6-8 e.srcElement .target засекает элемент на котором произошло событие
         for(var i = 0; i < parent.children.length; i++) { //требует разбора
             if(parent.children[i] == target) {
             	selectItem[i].classList.add('active');
@@ -33,6 +34,16 @@ function selectOneItem(){
     };
 };
 selectOneItem();
+
+function removeCurrentItem(){
+	var current = document.getElementsByClassName('active');
+	if (current.length == 0) {
+		alert('Choose an element to remove');
+	} else {
+		current[0].parentNode.removeChild(current[0]);
+	};
+};
+
 
 
 /*Для обработки выделенного элемента нужно будет искать его по уникальному признаку
