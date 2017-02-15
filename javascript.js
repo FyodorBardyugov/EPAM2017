@@ -3,8 +3,12 @@
 // функция создания элемента списка
 function createNewItem() {
 	var newLi = document.createElement('li'); // создал элемент списка
-	var val = document.getElementById('txt').value; // взял значение из инпут
+	var val = document.getElementById('txt').value; // взял значение из инпут текст
+	var color = document.getElementById('color').value; // взял значение из инпут цвет
+	var marker = document.getElementById('marker').value; // взял значение из инпут маркер
 	newLi.innerText = val; // поместил значение в готовый элемент списка
+	newLi.style.color = color; // добавил стиль к готовому элементу списка
+	newLi.setAttribute('type', marker); // добавил тип маркера элемента списка
 	var parent = document.getElementById('list'); // определил родителя для размещения в дом
 	parent.appendChild(newLi); // добавление в дом
 }
