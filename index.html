@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style.css">
+		<title>EPAM</title>
+	</head>
+	<body>
+			<div class="inputs">
+				<!-- сюда вводим текст для нового элемента списка -->
+				<label>Text<input type="text" id="txt"></label>
+				<!-- колор сохраняет и передаёт значение новому тегу в списке-->
+				<label>Color<input type="text" id="color"></label> 
+				<!-- маркер сохраняет и передаёт значение туда же -->
+				
+				Marker
+				<select id="marker">
+					<option>disc</option>
+					<option>circle</option>
+					<option>square</option>
+				</select>
+			</div>
+
+			<div class="buttons">
+				<!-- Создаёт и помещает элемент в конец списка -->
+				<input type="submit" value="Create" name="createNewItem" onclick="createNewItem()">
+
+				<!-- Применяет изменения к текущему выделенному элементу -->
+				<input type="submit" value="Change current" name="changeCurrentItem" onclick="changeCurrentItem()">
+				
+				<!-- Вообще удаляет выделеный элемент -->
+				<input type="submit" value="Delete current" name="removeCurrentItem" onclick="removeCurrentItem()">
+			</div>
+
+		<div class="results">
+			<!--
+			Здесь появляются новые элементы списка
+			их можно выделять и вносить изменения через
+			поля ввода вверху и клавишу Change current
+			-->
+			<ul id="list">
+			</ul>
+		</div>
+		<script src="javascript.js"></script>
+	</body>
+</html>
