@@ -26,16 +26,31 @@ function removeActiveClass() {
 function selectOneItem(){
 	var parent = document.getElementById('list');//нашёл родительский элемент от которого смотрим индекс дочернего
 	var selectItem = document.getElementsByTagName('li'); //выборка всех элементов (дочерних) к которым относится клик
-
 // функция которая находит индекс элемента массива по onclick
     parent.onclick = function (e) {
     	removeActiveClass();//вызов функции для удаления лишних
         
         var e = e || event; //IE 6-8 примет значение event
         var target = e.target || e.srcElement; //для поддержки в IE 6-8 e.srcElement .target засекает элемент на котором произошло событие
+        
         for(var i = 0; i < parent.children.length; i++) {
+            
             if(parent.children[i] == target) {
             	selectItem[i].classList.add('active');
+
+            	// для возврата в инпуты атрибутов выделенных элементов. НЕ РАБОТАЕТ ПОСЛЕ ВНЕСЕНИЯ ИЗМЕНЕНИЙ
+            	// сбор значений атрибутов для размещения в инпуте с текстом
+            	var val = selectItem[i].innerText;
+            	var textInput = document.getElementById('txt');
+            	textInput.setAttribute('value', val);
+            	// сбор значений атрибутов для размещения в инпуте с цветом
+            	var color = selectItem[i].style.color;
+            	var colorInput = document.getElementById('color');
+            	colorInput.setAttribute('value', color);
+            	// сбор значений атрибутов для размещения в инпуте с типом маркера
+            	var marker = selectItem[i].getAttribute('type');
+            	var markerSelect = document.getElementById('marker');
+            	markerSelect.setAttribute('value', marker);
             };
         };
     };
@@ -44,21 +59,20 @@ selectOneItem();
 
 // функция внесения изменения в выбранный элемент
 function changeCurrentItem(){
+	// собираются данные
 	var current = document.getElementsByClassName('active');
 	var val = document.getElementById('txt').value;
 	var color = document.getElementById('color').value;
 	var marker = document.getElementById('marker').value;
+	// проверка на невыделенные элементы и внесение изменений
 	if (current.length == 0) {
 		alert('Choose an element to apply changes');
 	} else {
-		current[0].innerHTML = val;
+		current[0].innerText = val;
 		current[0].style.color = color;
 		current[0].setAttribute('type', marker);
 	};
 };
-
-
-
 
 
 function removeCurrentItem(){
