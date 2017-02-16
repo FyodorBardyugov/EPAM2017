@@ -25,32 +25,31 @@ function removeActiveClass() {
 // функция которая снимает выделение с прочих элементов и выделяет по клику нужный
 function selectOneItem(){
 	var parent = document.getElementById('list');//нашёл родительский элемент от которого смотрим индекс дочернего
-	var selectItem = document.getElementsByTagName('li'); //выборка всех элементов (дочерних) к которым относится клик
+	var selectItem = parent.getElementsByTagName('li'); //выборка всех элементов (дочерних) к которым относится клик
 // функция которая находит индекс элемента массива по onclick
     parent.onclick = function (e) {
     	removeActiveClass();//вызов функции для удаления лишних
         
-        var e = e || event; //IE 6-8 примет значение event
-        var target = e.target || e.srcElement; //для поддержки в IE 6-8 e.srcElement .target засекает элемент на котором произошло событие
-        
+        var target = e.target; //фиксация события
         for(var i = 0; i < parent.children.length; i++) {
             
             if(parent.children[i] == target) {
-            	selectItem[i].classList.add('active');
-
-            	// для возврата в инпуты атрибутов выделенных элементов. НЕ РАБОТАЕТ ПОСЛЕ ВНЕСЕНИЯ ИЗМЕНЕНИЙ
+            	target.classList.add('active');
+            	
             	// сбор значений атрибутов для размещения в инпуте с текстом
-            	var val = selectItem[i].innerText;
+            	var val = target.innerText;
             	var textInput = document.getElementById('txt');
-            	textInput.setAttribute('value', val);
+            	textInput.value = val;//изменения от Юры Хомляка разобраться
+
             	// сбор значений атрибутов для размещения в инпуте с цветом
-            	var color = selectItem[i].style.color;
+            	var color = target.style.color;
             	var colorInput = document.getElementById('color');
-            	colorInput.setAttribute('value', color);
+            	colorInput.value = color;//изменения от Юры Хомляка разобраться
+            	
             	// сбор значений атрибутов для размещения в инпуте с типом маркера
-            	var marker = selectItem[i].getAttribute('type');
+            	var marker = target.getAttribute('type');
             	var markerSelect = document.getElementById('marker');
-            	markerSelect.setAttribute('value', marker);
+            	markerSelect.value = marker;//изменения от Юры Хомляка разобраться
             };
         };
     };
@@ -74,7 +73,7 @@ function changeCurrentItem(){
 	};
 };
 
-
+// удаление выделенного элемента
 function removeCurrentItem(){
 	var current = document.getElementsByClassName('active');
 	if (current.length == 0) {
@@ -83,35 +82,3 @@ function removeCurrentItem(){
 		current[0].parentNode.removeChild(current[0]);
 	};
 };
-
-
-
-
-/*Для обработки выделенного элемента нужно будет искать его по уникальному признаку
-в дереве элементов и по функциям передавать состояния. бля.*/
-
-
-
-/*слушатель ждёт когда происходит клик то назначается класс но только один, 
-остальные классы должны предварительно уничтожаться  */
-
-
-
-
-
-
-
-
-/*здесь будет функция принимающая значения от кнопки Create в переменную
-чтобы создать новый элемент списка в index и разместить его в конце
-обращаясь к элементам DOM*/
-
-/*отдельно нужно описать функцию которая следит за тем чтобы курсором 
-можно выделить и сделать активным один из элементов списка DOM,
-применив к нему класс css рамки*/
-
-/*также здесь будет функция, которая следит за тем что происходит в консоли,
-замечая какие элементы выделены и принимающая зачения отправленные клавишей
-Change current и изменяющая свойства выделенного элемента через DOM*/
-
-/*отдельная функция которая также будет понимать что есть выделеный элемент*/
