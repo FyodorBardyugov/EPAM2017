@@ -39,17 +39,17 @@ function selectOneItem(){
             	// сбор значений атрибутов для размещения в инпуте с текстом
             	var val = target.innerText;
             	var textInput = document.getElementById('txt');
-            	textInput.value = val;//изменения от Юры Хомляка разобраться
+            	textInput.value = val;//передаёт значение в инпут с текстом
 
             	// сбор значений атрибутов для размещения в инпуте с цветом
             	var color = target.style.color;
             	var colorInput = document.getElementById('color');
-            	colorInput.value = color;//изменения от Юры Хомляка разобраться
+            	colorInput.value = color;//передаёт значение в инпут с цветом
             	
             	// сбор значений атрибутов для размещения в инпуте с типом маркера
             	var marker = target.getAttribute('type');
             	var markerSelect = document.getElementById('marker');
-            	markerSelect.value = marker;//изменения от Юры Хомляка разобраться
+            	markerSelect.value = marker;//передаёт значение в инпут с маркером
             };
         };
     };
