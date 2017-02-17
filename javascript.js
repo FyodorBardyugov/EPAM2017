@@ -44,8 +44,13 @@ function selectOneItem(){
             	// сбор значений атрибутов для размещения в инпуте с цветом
             	var color = target.style.color;
             	var colorInput = document.getElementById('color');
-            	colorInput.value = color;//передаёт значение в инпут с цветом
-            	
+           	
+            	if (color == "") {
+            		colorInput.value = "black";	//если цвет при создании не указывался
+            	} else {
+            		colorInput.value = color;//передаёт значение в инпут с цветом
+            	};
+
             	// сбор значений атрибутов для размещения в инпуте с типом маркера
             	var marker = target.getAttribute('type');
             	var markerSelect = document.getElementById('marker');
